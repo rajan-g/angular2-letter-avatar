@@ -7,8 +7,10 @@ The sources for this package are in (https://github.com/rajan-g/angular2-letter-
 ###Install from npm
     ```
         npm install angular2-letter-avatar
-    ```
-###2.component file use like below
+   ```
+### Sample Output
+![letter-avatar](https://cloud.githubusercontent.com/assets/13415700/15478225/db7ba80c-2136-11e6-8fe6-0e58bfb54d50.png)
+###component file use like below
             ```
         import {Component} from 'angular2/core';
         import {LetterAvatarDirective} from '../directives/letter-avatar.directive';
