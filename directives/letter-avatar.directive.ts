@@ -32,7 +32,7 @@ export class LetterAvatarDirective implements OnInit {
             throw Error("LetterAvatarDirective configdata text missing");
         }
         var size = this.avatarData && this.avatarData.size ? this.avatarData.size : 100;
-        var fontColor = "#FFFFFF";
+        var fontColor = this.avatarData.fontColor ? this.avatarData.fontColor :"#FFFFFF";
         var isSquare = this.avatarData && this.avatarData.isSquare ? true :false;
         var background = this.avatarData && this.avatarData.background ? this.avatarData.background : null;
         var text = this.avatarData && this.avatarData.text ? this.avatarData.text : null;
