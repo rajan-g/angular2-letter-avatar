@@ -31,43 +31,51 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                         throw Error("LetterAvatarDirective configdata not provides");
                     }
                     if (!this.avatarData.text) {
-                        throw Error("LetterAvatarDirective configdata text missing");
+                        //            throw Error("LetterAvatarDirective configdata text missing");
+                        console.log("LetterAvatarDirective configdata text missing");
+                        this.avatarData.text = '?';
                     }
                     var size = this.avatarData && this.avatarData.size ? this.avatarData.size : 100;
-                    var fontColor = "#FFFFFF";
+                    var fontColor = this.avatarData.fontColor ? this.avatarData.fontColor : "#FFFFFF";
                     var isSquare = this.avatarData && this.avatarData.isSquare ? true : false;
                     var background = this.avatarData && this.avatarData.background ? this.avatarData.background : null;
                     var text = this.avatarData && this.avatarData.text ? this.avatarData.text : null;
                     this.background = background;
                     //        var canvas = document.createElement('canvas');
                     //        var canvas = this.dom.query("canvas");
-                    var canvas = this.dom.querySelector(this._el, 'canvas');
-                    canvas.height = size;
-                    canvas.width = size;
-                    canvas.style.backgroundColor = background || this.getRandomColor();
-                    canvas.style.border = "1px solid #d3d3d3";
-                    if (!isSquare) {
-                        canvas.style.borderRadius = "50%";
+                    this.canvas = this.dom.querySelector(this._el, 'canvas');
+                    if (this.canvas) {
+                        this.canvas.height = size;
+                        this.canvas.width = size;
+                        this.canvas.style.border = "1px solid #d3d3d3";
+                        if (!isSquare) {
+                            this.canvas.style.borderRadius = "50%";
+                        }
+                        var ctx = this.canvas.getContext("2d");
+                        var textArray = text.split(' ');
+                        var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
+                        var x, y, fontSize;
+                        letter = letter.toUpperCase();
+                        if (letter.length === 1) {
+                            x = (28 * size) / 100;
+                            y = (70 * size) / 100;
+                            fontSize = (60 * size) / 100;
+                        }
+                        if (letter.length === 2) {
+                            x = (13 * size) / 100;
+                            y = (67 * size) / 100;
+                            fontSize = (50 * size) / 100;
+                        }
+                        if (this.avatarData.fixedColor) {
+                            this.canvas.style.backgroundColor = background || this.colorize(letter);
+                        }
+                        else {
+                            this.canvas.style.backgroundColor = background || this.getRandomColor();
+                        }
+                        ctx.font = fontSize + "px Arial";
+                        ctx.fillStyle = fontColor;
+                        ctx.fillText(letter, x, y);
                     }
-                    var ctx = canvas.getContext("2d");
-                    var textArray = text.split(' ');
-                    var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
-                    var x, y, fontSize;
-                    letter = letter.toUpperCase();
-                    if (letter.length === 1) {
-                        x = (28 * size) / 100;
-                        y = (70 * size) / 100;
-                        fontSize = (60 * size) / 100;
-                    }
-                    if (letter.length === 2) {
-                        x = (18 * size) / 100;
-                        y = (67 * size) / 100;
-                        fontSize = (50 * size) / 100;
-                    }
-                    ctx.font = fontSize + "px Arial";
-                    ctx.fillStyle = fontColor;
-                    ctx.fillText(letter, x, y);
-                    //        this.letterSrc = canvas.toDataURL("image/png");
                 };
                 ;
                 LetterAvatarDirective.prototype.getRandomColor = function () {
@@ -78,10 +86,28 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                     }
                     return color;
                 };
+                LetterAvatarDirective.prototype.colorize = function (str) {
+                    for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash))
+                        ;
+                    var color = Math.floor(Math.abs((Math.sin(hash) * 10000) % 1 * 16777216)).toString(16);
+                    return '#' + Array(6 - color.length + 1).join('0') + color;
+                };
                 LetterAvatarDirective.prototype.ngOnInit = function () {
                     this.generateLetter();
                 };
                 ;
+                LetterAvatarDirective.prototype.ngOnChanges = function () {
+                    var args = [];
+                    for (var _i = 0; _i < arguments.length; _i++) {
+                        args[_i - 0] = arguments[_i];
+                    }
+                    console.log('onChange fired');
+                    console.log('changing', args);
+                    this.generateLetter();
+                    //         setTimeout(() => {
+                    //              this.ref.tick();
+                    //         },200);
+                };
                 __decorate([
                     core_1.Input('avatardata'), 
                     __metadata('design:type', Object)
@@ -89,8 +115,9 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
-                        template: "\n      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<canvas id=\"\" width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>\n        ",
-                        providers: [browser_1.BrowserDomAdapter]
+                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>\n        ",
+                        providers: [browser_1.BrowserDomAdapter],
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
                     __metadata('design:paramtypes', [core_1.ElementRef, browser_1.BrowserDomAdapter])
                 ], LetterAvatarDirective);

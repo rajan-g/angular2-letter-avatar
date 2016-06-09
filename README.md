@@ -39,12 +39,13 @@ The sources for this package are in (https://github.com/rajan-g/angular2-letter-
                 text: "Rajan Gunasekaran"
             };
             public avatarDataCircle2: any = {
-                size: 100,
+                size: 100, // default size is 100
         //        background: '#F39C12', // by default it will produce dynamic colors
                 fontColor: '#FFFFFF',
                 border: "2px solid #d3d3d3",
-                isSquare: false,
-                text: "Siva "
+                isSquare: false, // if it is true then letter avatar will be in square defaule value is false
+                text: "Siva", // 
+                fixedColor:true //if you enable true then letter will have same color for ever default value is false
             };
         }
 
