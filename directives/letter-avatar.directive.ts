@@ -86,7 +86,6 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
             
             //div mode
             this.size = size;
-            console.log(this.canvas);
             this.canvas.style.height = size;
             this.canvas.style.width = size;           
             this.canvas.style.border = "1px solid #d3d3d3";
