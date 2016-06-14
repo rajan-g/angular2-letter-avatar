@@ -29,7 +29,7 @@ System.register(['angular2/core', '../directives/letter-avatar.directive'], func
                     this.ngZone = ngZone;
                     this.ref = ref;
                     this.avatarDataSquare = {
-                        size: 100,
+                        size: 150,
                         //        background: '#F39C12', // by default it will produce dynamic colors
                         fontColor: '#FFFFFF',
                         border: "2px solid #d3d3d3",

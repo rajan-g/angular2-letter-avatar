@@ -21,7 +21,7 @@ export class AppComponent implements OnChanges {
 
     }
     public avatarDataSquare: any = {
-        size: 100,
+        size: 150,
         //        background: '#F39C12', // by default it will produce dynamic colors
         fontColor: '#FFFFFF',
         border: "2px solid #d3d3d3",

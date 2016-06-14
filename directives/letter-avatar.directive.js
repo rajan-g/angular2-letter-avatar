@@ -78,6 +78,8 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                         //        this.letterSrc = canvas.toDataURL("image/png");
                         */
                         //div mode
+                        this.size = size;
+                        console.log(this.canvas);
                         this.canvas.style.height = size;
                         this.canvas.style.width = size;
                         this.canvas.style.border = "1px solid #d3d3d3";
@@ -91,10 +93,10 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                         this.fontSize = (50 * size) / 100;
                         this.padding = (20 * size) / 100;
                         if (this.avatarData.fixedColor) {
-                            this.canvas.style.backgroundColor = background || this.colorize(letter);
+                            this.background = background || this.colorize(letter);
                         }
                         else {
-                            this.canvas.style.backgroundColor = background || this.getRandomColor();
+                            this.background = background || this.getRandomColor();
                         }
                     }
                 };
@@ -134,7 +136,7 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
-                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> \n<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>\n-->\n<div style=\"text-align:center;border-radius:50%;background:red;\">\n<div style=\"padding-top: {{padding}}px;font-size: {{fontSize}}px;color:#fff\">{{letter}}</div>\n</div>\n",
+                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> \n<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>\n-->\n<div style=\"text-align:center;border-radius:50%;width:{{size}}px ;height:{{size}}px; background:{{background}}\">\n<div style=\"padding-top: {{padding}}px;font-size: {{fontSize}}px;color:#fff\">{{letter}}</div>\n</div>\n",
                         providers: [browser_1.BrowserDomAdapter],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 

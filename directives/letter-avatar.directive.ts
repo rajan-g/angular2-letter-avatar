@@ -8,7 +8,7 @@ import {BrowserDomAdapter} from 'angular2/platform/browser'
 <!--<img style="background: {{background}}" src="{{letterSrc}}" /> 
 <canvas width="100" height="100" >
 Your browser does not support the HTML5 canvas tag.</canvas>\n\-->
-<div style="text-align:center;border-radius:50%;background:red;">
+<div style="text-align:center;border-radius:50%;width:{{size}}px ;height:{{size}}px; background:{{background}}">
 <div style="padding-top: {{padding}}px;font-size: {{fontSize}}px;color:#fff">{{letter}}</div>
 </div>
 `,
@@ -23,6 +23,7 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
     fontSize: any;
     padding: any;
     letter: any;
+    size: any;
     canvas: any;
     private _el: HTMLElement;
 
@@ -82,7 +83,10 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
             //        this.letterSrc = canvas.toDataURL("image/png");
             */
             
+            
             //div mode
+            this.size = size;
+            console.log(this.canvas);
             this.canvas.style.height = size;
             this.canvas.style.width = size;           
             this.canvas.style.border = "1px solid #d3d3d3";
@@ -96,9 +100,9 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
             this.fontSize = (50*size)/100
             this.padding = (20*size)/100           
             if(this.avatarData.fixedColor) {
-             this.canvas.style.backgroundColor = background || this.colorize(letter);                
+                this.background = background || this.colorize(letter);                
             }else {
-             this.canvas.style.backgroundColor = background || this.getRandomColor();
+             this.background = background || this.getRandomColor();
             }
             
             //        this.letterSrc = canvas.toDataURL("image/png");
