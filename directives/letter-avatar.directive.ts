@@ -8,7 +8,7 @@ import {BrowserDomAdapter} from 'angular2/platform/browser'
 <!--<img style="background: {{background}}" src="{{letterSrc}}" /> 
 <canvas width="100" height="100" >
 Your browser does not support the HTML5 canvas tag.</canvas>\n\-->
-<div style="text-align:center;width:200px; height:200px; border-radius:50%;background:red;">
+<div style="text-align:center;border-radius:50%;background:red;">
 <div style="padding-top: {{padding}}px;font-size: {{fontSize}}px;color:#fff">{{letter}}</div>
 </div>
 `,

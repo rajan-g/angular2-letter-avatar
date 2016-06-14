@@ -134,7 +134,7 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
-                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> \n<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>\n-->\n<div style=\"text-align:center;width:200px; height:200px; border-radius:50%;background:red;\">\n<div style=\"padding-top: {{padding}}px;font-size: {{fontSize}}px;color:#fff\">{{letter}}</div>\n</div>\n",
+                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> \n<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>\n-->\n<div style=\"text-align:center;border-radius:50%;background:red;\">\n<div style=\"padding-top: {{padding}}px;font-size: {{fontSize}}px;color:#fff\">{{letter}}</div>\n</div>\n",
                         providers: [browser_1.BrowserDomAdapter],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
