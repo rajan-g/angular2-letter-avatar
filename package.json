@@ -1,6 +1,6 @@
 {
   "name": "angular2-letter-avatar",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "letter avatar is angular2 directive. It will generate avatar based on given text",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "typings":"^0.8.1"
   },
   "keywords": [
-    "angular2-avatar\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C-letter\u001b[F\u001b[B\u001b[F\u001b[B\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C",
+    "angular2-avatar",
     "ng2-letter-avatar",
     "letter-avatar"
   ],
