@@ -5,12 +5,12 @@ import {BrowserDomAdapter} from 'angular2/platform/browser'
 @Component({
     selector: 'avatar',
     template: `      
-<!--<img style="background: {{background}}" src="{{letterSrc}}" /> 
+<!--<img style="background: {{background}}" src="{{letterSrc}}" /> -->
 <canvas width="100" height="100" >
-Your browser does not support the HTML5 canvas tag.</canvas>\n\-->
-<div style="text-align:center;border-radius:50%;width:{{size}}px ;height:{{size}}px; background:{{background}};border: {{border}}">
-<div style="padding-top: {{padding}}px;font-size: {{fontSize}}px;color:#fff">{{letter}}</div>
-</div>
+Your browser does not support the HTML5 canvas tag.</canvas>
+<!--<div style="text-align:center;border-radius:50%;width:{{size}}px ;height:{{size}}px; background:{{background}};border: {{border}}">
+<div style="padding-top: {{padding}}px;font-size: {{fontSize}}px;color:{{fontColor}}">{{letter}}</div>
+</div>-->
 `,
     providers: [BrowserDomAdapter],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,6 +24,7 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
     padding: any;
     letter: any;
     size: any;
+    fontColor:any;
     border: any;
     canvas: any;
     private _el: HTMLElement;
@@ -42,7 +43,7 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
             this.avatarData.text = '?';
         }
         var size = this.avatarData && this.avatarData.size ? this.avatarData.size : 100;
-        var fontColor = this.avatarData.fontColor ? this.avatarData.fontColor : "#FFFFFF";
+        this.fontColor = this.avatarData.fontColor ? this.avatarData.fontColor : "#FFFFFF";
         var isSquare = this.avatarData && this.avatarData.isSquare ? true : false;
         var border = this.avatarData && this.avatarData.border ? this.avatarData.border : "1px solid #d3d3d3";
         var background = this.avatarData && this.avatarData.background ? this.avatarData.background : null;
@@ -50,12 +51,12 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
         this.background = background;
         //        var canvas = document.createElement('canvas');
         //        var canvas = this.dom.query("canvas");
-        this.canvas = this.dom.querySelector(this._el, 'div');
+        this.canvas = this.dom.querySelector(this._el, 'canvas');
         if (this.canvas) {
-            /*
+            
             this.canvas.height = size;
             this.canvas.width = size;           
-            this.canvas.style.border = "1px solid #d3d3d3";
+            this.canvas.style.border = border;
             if (!isSquare) {
                 this.canvas.style.borderRadius = "50%";
             }
@@ -64,28 +65,43 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
             var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
             var x, y, fontSize;
             letter = letter.toUpperCase();
+             var samllPatter = new RegExp("[IJ]+");
+             var bigPattern = new RegExp("[M]+");
             if (letter.length === 1) {
-                x = (28 * size) / 100;
+                x = (30 * size) / 100;
                 y = (70 * size) / 100;
-                fontSize = (60 * size) / 100;
+                fontSize = (60 * size) / 100;               
+                if (samllPatter.test(letter)) {
+                    x = (40 * size) / 100;
+                }
             }
             if (letter.length === 2) {
-                x = (13 * size) / 100;
+                x = (14 * size) / 100;
                 y = (67 * size) / 100;
                 fontSize = (50 * size) / 100;
+          
+                 if (samllPatter.test(letter) && letter==='II' || letter==='IJ' ||letter==='JI') {
+                    x = (33 * size) / 100;
+                 } else if (samllPatter.test(letter)) {
+                     x = (25 * size) / 100;
+                }
+                if(letter == 'MM' || letter == 'MW' || letter == 'WM') {
+                    x = (9 * size) / 100;
+                }
             }
             if(this.avatarData.fixedColor) {
              this.canvas.style.backgroundColor = background || this.colorize(letter);                
             }else {
              this.canvas.style.backgroundColor = background || this.getRandomColor();
             }
-            ctx.font = fontSize + "px Arial";
-            ctx.fillStyle = fontColor;
+            ctx.font = fontSize + "px Times New Roman, Georgia, Serif";
+            ctx.fillStyle = this.fontColor;
+            console.log('x, y',x, y);
             ctx.fillText(letter, x, y);
             //        this.letterSrc = canvas.toDataURL("image/png");
-            */
             
             
+         /*   
             //div mode
             this.size = size;         
             this.border = border;
@@ -97,12 +113,23 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
             letter = letter.toUpperCase();
             this.letter =  letter;
             this.fontSize = (50*size)/100
-            this.padding = (20*size)/100           
+            this.padding = (20*size)/100         
+            if(this.avatarData.border){  
+            var borderSize = this.avatarData.border.split(' ')[0];
+//            if(borderSize) {
+//                borderSize = borderSize.replace(/\D/g, '');
+//                borderSize = parseInt(borderSize);
+//                if (borderSize && borderSize >0) {
+//                    this.padding = this.padding - borderSize;
+//                }
+//            }
+            }
             if(this.avatarData.fixedColor) {
                 this.background = background || this.colorize(letter);                
             }else {
              this.background = background || this.getRandomColor();
             }
+            */
             
             //        this.letterSrc = canvas.toDataURL("image/png");
         }
