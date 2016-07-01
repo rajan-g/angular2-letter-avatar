@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/platform/browser'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,22 +10,36 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1;
+    var core_1, common_1, browser_1;
     var LetterAvatarDirective;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (common_1_1) {
+                common_1 = common_1_1;
+            },
             function (browser_1_1) {
                 browser_1 = browser_1_1;
             }],
         execute: function() {
             LetterAvatarDirective = (function () {
-                function LetterAvatarDirective(el, dom) {
+                function LetterAvatarDirective(el, dom, _ngZone) {
                     this.dom = dom;
+                    this._ngZone = _ngZone;
+                    this.background = 'red';
+                    this.fontSize = 49;
+                    this.padding = 28;
+                    this.letter = "?";
+                    this.size = 100;
+                    this.fontColor = '#FFFFFF';
+                    this.props = null;
                     this._el = el.nativeElement;
                 }
+                LetterAvatarDirective.prototype.test = function () {
+                    this.generateLetter();
+                };
                 LetterAvatarDirective.prototype.generateLetter = function () {
                     if (!this.avatarData) {
                         throw Error("LetterAvatarDirective configdata not provides");
@@ -42,10 +56,35 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                     var background = this.avatarData && this.avatarData.background ? this.avatarData.background : null;
                     var text = this.avatarData && this.avatarData.text ? this.avatarData.text : null;
                     this.background = background;
+                    /*****DIV******** start*/
+                    var textArray = text.split(' ');
+                    var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
+                    var x, y, fontSize;
+                    letter = letter.toUpperCase();
+                    this.fontSize = (39 * size) / 100;
+                    this.padding = (28 * size) / 100;
+                    this.letter = letter;
+                    this.size = size;
+                    this.props = new Object();
+                    this.props['size'] = size;
+                    this.props['padding'] = this.padding;
+                    this.props['letter'] = letter;
+                    this.props['fontSize'] = this.fontSize;
+                    this.props['isSquare'] = isSquare;
+                    this.props['border'] = border;
+                    this.props['background'] = background;
+                    if (this.avatarData.fixedColor && !background) {
+                        this.props['background'] = background || this.colorize(letter);
+                    }
+                    else {
+                        this.props['background'] = background || this.getRandomColor();
+                    }
+                    /*****DIV********end*/
                     //        var canvas = document.createElement('canvas');
                     //        var canvas = this.dom.query("canvas");
-                    this.canvas = this.dom.querySelector(this._el, 'canvas');
+                    /*this.canvas = this.dom.querySelector(this._el, 'canvas');
                     if (this.canvas) {
+                        
                         this.canvas.height = size;
                         this.canvas.width = size;
                         this.canvas.style.border = border;
@@ -57,41 +96,81 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                         var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
                         var x, y, fontSize;
                         letter = letter.toUpperCase();
-                        var samllPatter = new RegExp("[IJ]+");
-                        var bigPattern = new RegExp("[M]+");
+                         var samllPatter = new RegExp("[IJ]+");
+                         var bigPattern = new RegExp("[M]+");
                         if (letter.length === 1) {
-                            x = (30 * size) / 100;
-                            y = (70 * size) / 100;
-                            fontSize = (60 * size) / 100;
+                            x = (37 * size) / 100;
+                            y = (63 * size) / 100;
+                            fontSize = (40 * size) / 100;
                             if (samllPatter.test(letter)) {
-                                x = (40 * size) / 100;
+                                x = (42 * size) / 100;
+                            }
+                            if(letter.indexOf('M')!==-1 || letter.indexOf('W')!==-1 ){
+                              x = (33 * size) / 100;
                             }
                         }
                         if (letter.length === 2) {
-                            x = (14 * size) / 100;
-                            y = (67 * size) / 100;
-                            fontSize = (50 * size) / 100;
-                            if (samllPatter.test(letter) && letter === 'II' || letter === 'IJ' || letter === 'JI') {
-                                x = (33 * size) / 100;
+                            x = (24 * size) / 100;
+                            y = (63 * size) / 100;
+                            fontSize = (40 * size) / 100;
+                      
+                             if (((letter.indexOf('I')!=-1 && (letter.indexOf('M')==-1) && (letter.indexOf('W')==-1))) ||
+                             (letter.indexOf('J')!=-1 && (letter.indexOf('M')==-1) && (letter.indexOf('W')==-1))) {
+                                x = (30 * size) / 100;
+                             } else if (samllPatter.test(letter)) {
+                                 x = (25 * size) / 100;
                             }
-                            else if (samllPatter.test(letter)) {
-                                x = (25 * size) / 100;
+                            if(letter == 'MM' || letter == 'MW' || letter == 'WM') {
+                                x = (18 * size) / 100;
                             }
-                            if (letter == 'MM' || letter == 'MW' || letter == 'WM') {
-                                x = (9 * size) / 100;
+                            
+                            if(letter == 'II' || letter == 'JJ') {
+                                x = (35 * size) / 100;
                             }
                         }
-                        if (this.avatarData.fixedColor) {
-                            this.canvas.style.backgroundColor = background || this.colorize(letter);
-                        }
-                        else {
-                            this.canvas.style.backgroundColor = background || this.getRandomColor();
+                        if(this.avatarData.fixedColor) {
+                         this.canvas.style.backgroundColor = background || this.colorize(letter);
+                        }else {
+                         this.canvas.style.backgroundColor = background || this.getRandomColor();
                         }
                         ctx.font = fontSize + "px Times New Roman, Georgia, Serif";
                         ctx.fillStyle = this.fontColor;
-                        console.log('x, y', x, y);
-                        ctx.fillText(letter, x, y);
-                    }
+                        console.log('x, y',x, y);
+                        ctx.fillText(letter, x, y); */
+                    //        this.letterSrc = canvas.toDataURL("image/png");
+                    /*
+                       //div mode
+                       this.size = size;
+                       this.border = border;
+                       if (!isSquare) {
+                           this.canvas.style.borderRadius = "50%";
+                       }
+                       var textArray = text.split(' ');
+                       var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
+                       letter = letter.toUpperCase();
+                       this.letter =  letter;
+                       this.fontSize = (50*size)/100
+                       this.padding = (20*size)/100
+                       if(this.avatarData.border){
+                       var borderSize = this.avatarData.border.split(' ')[0];
+           //            if(borderSize) {
+           //                borderSize = borderSize.replace(/\D/g, '');
+           //                borderSize = parseInt(borderSize);
+           //                if (borderSize && borderSize >0) {
+           //                    this.padding = this.padding - borderSize;
+           //                }
+           //            }
+                       }
+                       if(this.avatarData.fixedColor) {
+                           this.background = background || this.colorize(letter);
+                       }else {
+                        this.background = background || this.getRandomColor();
+                       }
+                       
+                       
+                       //        this.letterSrc = canvas.toDataURL("image/png");
+                   }*/
+                    return true;
                 };
                 ;
                 LetterAvatarDirective.prototype.getRandomColor = function () {
@@ -109,15 +188,20 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                     return '#' + Array(6 - color.length + 1).join('0') + color;
                 };
                 LetterAvatarDirective.prototype.ngOnInit = function () {
+                    var _this = this;
                     this.generateLetter();
+                    this._ngZone.runOutsideAngular(function () {
+                        // reenter the Angular zone and display done
+                        _this._ngZone.run(function () { console.log('Outside Done!'); });
+                    });
                 };
-                ;
                 LetterAvatarDirective.prototype.ngOnChanges = function () {
                     var args = [];
                     for (var _i = 0; _i < arguments.length; _i++) {
                         args[_i - 0] = arguments[_i];
                     }
                     this.generateLetter();
+                    console.log(args);
                     //         setTimeout(() => {
                     //              this.ref.tick();
                     //         },200);
@@ -129,11 +213,11 @@ System.register(['angular2/core', 'angular2/platform/browser'], function(exports
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
-                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>\n<!--<div style=\"text-align:center;border-radius:50%;width:{{size}}px ;height:{{size}}px; background:{{background}};border: {{border}}\">\n<div style=\"padding-top: {{padding}}px;font-size: {{fontSize}}px;color:{{fontColor}}\">{{letter}}</div>\n</div>-->\n",
+                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<!--<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>-->\n<div *ngIf=\"props\" style=\"width: {{props.size}}px; height: {{props.size}}px;background-color: {{props.background}};font-size: {{props.fontSize}}px;text-align: center;border-radius: {{props.isSquare? '0%;': '50%' }}; border:{{props.border}};\">\n<div style=\"padding-top: {{props.padding}}px; color: {{fontColor}}\">{{props.letter}}</div>\n</div>\n", directives: [common_1.FORM_DIRECTIVES, common_1.NgIf],
                         providers: [browser_1.BrowserDomAdapter],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef, browser_1.BrowserDomAdapter])
+                    __metadata('design:paramtypes', [core_1.ElementRef, browser_1.BrowserDomAdapter, core_1.NgZone])
                 ], LetterAvatarDirective);
                 return LetterAvatarDirective;
             }());
