@@ -1,6 +1,6 @@
-import {Component, ElementRef, Input, OnInit, ChangeDetectionStrategy, OnChanges, NgZone} from 'angular2/core';
-import {FORM_DIRECTIVES, NgIf} from 'angular2/common';
-import {BrowserDomAdapter} from 'angular2/platform/browser'
+import {Component, ElementRef, Input, OnInit, ChangeDetectionStrategy, OnChanges} from '@angular/core';
+import {FORM_DIRECTIVES, NgIf} from '@angular/common';
+import {BrowserDomAdapter} from '@angular/platform-browser/src/browser/browser_adapter';
 
 
 @Component({
@@ -9,8 +9,8 @@ import {BrowserDomAdapter} from 'angular2/platform/browser'
 <!--<img style="background: {{background}}" src="{{letterSrc}}" /> -->
 <!--<canvas width="100" height="100" >
 Your browser does not support the HTML5 canvas tag.</canvas>-->
-<div *ngIf="props" style="width: {{props.size}}px; height: {{props.size}}px;background-color: {{props.background}};font-size: {{props.fontSize}}px;text-align: center;border-radius: {{props.isSquare? '0%;': '50%' }}; border:{{props.border}};">
-<div style="padding-top: {{props.padding}}px; color: {{fontColor}}">{{props.letter}}</div>
+<div *ngIf="props" [style.background-color]="props.background" [style.width] = "props.size" [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] ="props.textalign"> 
+<div [style.padding-top]='props.padding' [style.color]='fontColor'>{{props.letter}}</div>
 </div>
 `,  directives: [FORM_DIRECTIVES, NgIf],
     providers: [BrowserDomAdapter],
@@ -31,12 +31,25 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
     props: Object = null;
     private _el: HTMLElement;
 
-    constructor(el: ElementRef, private dom: BrowserDomAdapter, private _ngZone: NgZone) {
+    constructor(el: ElementRef, private dom: BrowserDomAdapter) {
         this._el = el.nativeElement;
     }
     test() {
       this.generateLetter();
-    }   
+    }
+    changeBackground() {
+        let style = 'width:'+ this.props['size']+ 'px ;'+
+             'height:'+  this.props['size'] + 'px ;'+
+            'background-color:'+  this.props['background']+';'+
+             'font-size:'+ this.props['fontSize'] + 'px; '+
+            'text-align:'+ 'center;'+
+            'border-radius:'+ (this.props['isSquare'] ? '0%;' : '50%;')+
+            'border:'+ this.props['border'];
+            console.log(style);
+            return style;
+        
+    }
+    
     generateLetter() {
         if (!this.avatarData) {
             throw Error("LetterAvatarDirective configdata not provides");
@@ -67,7 +80,12 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
         this.props['padding'] = this.padding;
         this.props['letter'] = letter;
         this.props['fontSize'] = this.fontSize;
-        this.props['isSquare'] = isSquare;
+        if(isSquare) {
+            this.props['borderradius'] = '0%';
+        } else {
+            this.props['borderradius'] = '50%';
+        }
+        this.props['textalign'] = 'center';
         this.props['border'] = border;
         this.props['background'] = background;
          if(this.avatarData.fixedColor && !background) {
@@ -188,18 +206,10 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
     }
     
     ngOnInit() {
-       
         this.generateLetter(); 
-      this._ngZone.runOutsideAngular(() => {
-        // reenter the Angular zone and display done
-        this._ngZone.run(() => { console.log('Outside Done!') });
-      });
     }
     ngOnChanges(...args: any[]) {
         this.generateLetter();
         console.log(args);
-        //         setTimeout(() => {
-        //              this.ref.tick();
-        //         },200);
     }
 }
