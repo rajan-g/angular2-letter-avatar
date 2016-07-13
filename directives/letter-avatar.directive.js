@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/common', '@angular/platform-browser/src/browser/browser_adapter'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, browser_1;
+    var core_1, common_1, browser_adapter_1;
     var LetterAvatarDirective;
     return {
         setters:[
@@ -20,14 +20,13 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
             function (common_1_1) {
                 common_1 = common_1_1;
             },
-            function (browser_1_1) {
-                browser_1 = browser_1_1;
+            function (browser_adapter_1_1) {
+                browser_adapter_1 = browser_adapter_1_1;
             }],
         execute: function() {
             LetterAvatarDirective = (function () {
-                function LetterAvatarDirective(el, dom, _ngZone) {
+                function LetterAvatarDirective(el, dom) {
                     this.dom = dom;
-                    this._ngZone = _ngZone;
                     this.background = 'red';
                     this.fontSize = 49;
                     this.padding = 28;
@@ -70,7 +69,13 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
                     this.props['padding'] = this.padding;
                     this.props['letter'] = letter;
                     this.props['fontSize'] = this.fontSize;
-                    this.props['isSquare'] = isSquare;
+                    if (isSquare) {
+                        this.props['borderradius'] = '0%';
+                    }
+                    else {
+                        this.props['borderradius'] = '50%';
+                    }
+                    this.props['textalign'] = 'center';
                     this.props['border'] = border;
                     this.props['background'] = background;
                     if (this.avatarData.fixedColor && !background) {
@@ -188,12 +193,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
                     return '#' + Array(6 - color.length + 1).join('0') + color;
                 };
                 LetterAvatarDirective.prototype.ngOnInit = function () {
-                    var _this = this;
                     this.generateLetter();
-                    this._ngZone.runOutsideAngular(function () {
-                        // reenter the Angular zone and display done
-                        _this._ngZone.run(function () { console.log('Outside Done!'); });
-                    });
                 };
                 LetterAvatarDirective.prototype.ngOnChanges = function () {
                     var args = [];
@@ -202,9 +202,6 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
                     }
                     this.generateLetter();
                     console.log(args);
-                    //         setTimeout(() => {
-                    //              this.ref.tick();
-                    //         },200);
                 };
                 __decorate([
                     core_1.Input('avatardata'), 
@@ -213,11 +210,11 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
-                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<!--<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>-->\n<div *ngIf=\"props\" style=\"width: {{props.size}}px; height: {{props.size}}px;background-color: {{props.background}};font-size: {{props.fontSize}}px;text-align: center;border-radius: {{props.isSquare? '0%;': '50%' }}; border:{{props.border}};\">\n<div style=\"padding-top: {{props.padding}}px; color: {{fontColor}}\">{{props.letter}}</div>\n</div>\n", directives: [common_1.FORM_DIRECTIVES, common_1.NgIf],
-                        providers: [browser_1.BrowserDomAdapter],
+                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<!--<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>-->\n<div *ngIf=\"props\" [style.background-color]=\"props.background\" [style.width] = \"props.size\" [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] =\"props.textalign\"> \n<div [style.padding-top]='props.padding' [style.color]='fontColor'>{{props.letter}}</div>\n</div>\n", directives: [common_1.FORM_DIRECTIVES, common_1.NgIf],
+                        providers: [browser_adapter_1.BrowserDomAdapter],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef, browser_1.BrowserDomAdapter, core_1.NgZone])
+                    __metadata('design:paramtypes', [core_1.ElementRef, browser_adapter_1.BrowserDomAdapter])
                 ], LetterAvatarDirective);
                 return LetterAvatarDirective;
             }());
