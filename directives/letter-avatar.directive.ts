@@ -37,18 +37,6 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
     test() {
       this.generateLetter();
     }
-    changeBackground() {
-        let style = 'width:'+ this.props['size']+ 'px ;'+
-             'height:'+  this.props['size'] + 'px ;'+
-            'background-color:'+  this.props['background']+';'+
-             'font-size:'+ this.props['fontSize'] + 'px; '+
-            'text-align:'+ 'center;'+
-            'border-radius:'+ (this.props['isSquare'] ? '0%;' : '50%;')+
-            'border:'+ this.props['border'];
-            console.log(style);
-            return style;
-        
-    }
     
     generateLetter() {
         if (!this.avatarData) {
