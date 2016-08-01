@@ -44,8 +44,6 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                         throw Error("LetterAvatarDirective configdata not provides");
                     }
                     if (!this.avatarData.text) {
-                        //            throw Error("LetterAvatarDirective configdata text missing");
-                        console.log("LetterAvatarDirective configdata text missing");
                         this.avatarData.text = '?';
                     }
                     var size = this.avatarData && this.avatarData.size ? this.avatarData.size : 100;
@@ -55,10 +53,8 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                     var background = this.avatarData && this.avatarData.background ? this.avatarData.background : null;
                     var text = this.avatarData && this.avatarData.text ? this.avatarData.text : null;
                     this.background = background;
-                    /*****DIV******** start*/
                     var textArray = text.split(' ');
                     var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
-                    var x, y, fontSize;
                     letter = letter.toUpperCase();
                     this.fontSize = (39 * size) / 100;
                     this.padding = (28 * size) / 100;
@@ -66,7 +62,7 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                     this.size = size;
                     this.props = new Object();
                     this.props['size'] = size;
-                    this.props['padding'] = this.padding;
+                    this.props['lineheight'] = this.size + 'px';
                     this.props['letter'] = letter;
                     this.props['fontSize'] = this.fontSize;
                     if (isSquare) {
@@ -84,97 +80,6 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                     else {
                         this.props['background'] = background || this.getRandomColor();
                     }
-                    /*****DIV********end*/
-                    //        var canvas = document.createElement('canvas');
-                    //        var canvas = this.dom.query("canvas");
-                    /*this.canvas = this.dom.querySelector(this._el, 'canvas');
-                    if (this.canvas) {
-                        
-                        this.canvas.height = size;
-                        this.canvas.width = size;
-                        this.canvas.style.border = border;
-                        if (!isSquare) {
-                            this.canvas.style.borderRadius = "50%";
-                        }
-                        var ctx = this.canvas.getContext("2d");
-                        var textArray = text.split(' ');
-                        var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
-                        var x, y, fontSize;
-                        letter = letter.toUpperCase();
-                         var samllPatter = new RegExp("[IJ]+");
-                         var bigPattern = new RegExp("[M]+");
-                        if (letter.length === 1) {
-                            x = (37 * size) / 100;
-                            y = (63 * size) / 100;
-                            fontSize = (40 * size) / 100;
-                            if (samllPatter.test(letter)) {
-                                x = (42 * size) / 100;
-                            }
-                            if(letter.indexOf('M')!==-1 || letter.indexOf('W')!==-1 ){
-                              x = (33 * size) / 100;
-                            }
-                        }
-                        if (letter.length === 2) {
-                            x = (24 * size) / 100;
-                            y = (63 * size) / 100;
-                            fontSize = (40 * size) / 100;
-                      
-                             if (((letter.indexOf('I')!=-1 && (letter.indexOf('M')==-1) && (letter.indexOf('W')==-1))) ||
-                             (letter.indexOf('J')!=-1 && (letter.indexOf('M')==-1) && (letter.indexOf('W')==-1))) {
-                                x = (30 * size) / 100;
-                             } else if (samllPatter.test(letter)) {
-                                 x = (25 * size) / 100;
-                            }
-                            if(letter == 'MM' || letter == 'MW' || letter == 'WM') {
-                                x = (18 * size) / 100;
-                            }
-                            
-                            if(letter == 'II' || letter == 'JJ') {
-                                x = (35 * size) / 100;
-                            }
-                        }
-                        if(this.avatarData.fixedColor) {
-                         this.canvas.style.backgroundColor = background || this.colorize(letter);
-                        }else {
-                         this.canvas.style.backgroundColor = background || this.getRandomColor();
-                        }
-                        ctx.font = fontSize + "px Times New Roman, Georgia, Serif";
-                        ctx.fillStyle = this.fontColor;
-                        console.log('x, y',x, y);
-                        ctx.fillText(letter, x, y); */
-                    //        this.letterSrc = canvas.toDataURL("image/png");
-                    /*
-                       //div mode
-                       this.size = size;
-                       this.border = border;
-                       if (!isSquare) {
-                           this.canvas.style.borderRadius = "50%";
-                       }
-                       var textArray = text.split(' ');
-                       var letter = textArray[0].substr(0, 1) + '' + (textArray.length > 1 ? textArray[1].substr(0, 1) : '');
-                       letter = letter.toUpperCase();
-                       this.letter =  letter;
-                       this.fontSize = (50*size)/100
-                       this.padding = (20*size)/100
-                       if(this.avatarData.border){
-                       var borderSize = this.avatarData.border.split(' ')[0];
-           //            if(borderSize) {
-           //                borderSize = borderSize.replace(/\D/g, '');
-           //                borderSize = parseInt(borderSize);
-           //                if (borderSize && borderSize >0) {
-           //                    this.padding = this.padding - borderSize;
-           //                }
-           //            }
-                       }
-                       if(this.avatarData.fixedColor) {
-                           this.background = background || this.colorize(letter);
-                       }else {
-                        this.background = background || this.getRandomColor();
-                       }
-                       
-                       
-                       //        this.letterSrc = canvas.toDataURL("image/png");
-                   }*/
                     return true;
                 };
                 ;
@@ -201,7 +106,6 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                         args[_i - 0] = arguments[_i];
                     }
                     this.generateLetter();
-                    console.log(args);
                 };
                 __decorate([
                     core_1.Input('avatardata'), 
@@ -210,7 +114,7 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
-                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<!--<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>-->\n<div *ngIf=\"props\" [style.background-color]=\"props.background\" [style.width] = \"props.size\" [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] =\"props.textalign\"> \n<div [style.padding-top]='props.padding' [style.color]='fontColor'>{{props.letter}}</div>\n</div>\n", directives: [common_1.FORM_DIRECTIVES, common_1.NgIf],
+                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<!--<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>-->\n<div *ngIf=\"props\" [style.background-color]=\"props.background\" [style.width] = \"props.size\" [style.line-height]='props.lineheight' [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] =\"props.textalign\"> \n<div [style.color]='fontColor'>{{props.letter}}</div>\n</div>\n", directives: [common_1.FORM_DIRECTIVES, common_1.NgIf],
                         providers: [browser_adapter_1.BrowserDomAdapter],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
