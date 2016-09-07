@@ -6,7 +6,7 @@ The sources for this package are in (https://github.com/rajan-g/angular2-letter-
 ![letter-avatar](https://cloud.githubusercontent.com/assets/13415700/15478225/db7ba80c-2136-11e6-8fe6-0e58bfb54d50.png)
 
 ### Live Demo
-[Live Demo Site](http://www.angular2modules.com/captcha "Live Demo Site For Letter Recaptcha ")
+[Live Demo Site](http://www.angular2modules.com/letter "Live Demo Site For Letter letter Avatar ")
 OR
 [Live Demo Site](http://www.angular2modules.com "Live Demo Site For Letter Recaptcha ")
 
