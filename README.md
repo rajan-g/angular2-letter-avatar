@@ -4,7 +4,13 @@ letter avatar is angular2 directive. It will generate avatar based on given text
 The sources for this package are in (https://github.com/rajan-g/angular2-letter-avatar.git) repo. Please file issues and pull requests against that repo.
 ### Demo Output
 ![letter-avatar](https://cloud.githubusercontent.com/assets/13415700/15478225/db7ba80c-2136-11e6-8fe6-0e58bfb54d50.png)
-###Install from npm
+
+### Live Demo
+[Live Demo Site](http://www.angular2modules.com/captcha "Live Demo Site For Letter Recaptcha ")
+OR
+[Live Demo Site](http://www.angular2modules.com "Live Demo Site For Letter Recaptcha ")
+
+### Install from npm
 ```sh
         npm install angular2-letter-avatar
 ```

@@ -61,7 +61,7 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                     this.letter = letter;
                     this.size = size;
                     this.props = new Object();
-                    this.props['size'] = size;
+                    this.props['size'] = size + 'px';
                     this.props['lineheight'] = this.size + 'px';
                     this.props['letter'] = letter;
                     this.props['fontSize'] = this.fontSize;
