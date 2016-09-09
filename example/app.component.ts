@@ -1,6 +1,3 @@
-/* 
- * @author RAJAN G
- */
 
 import {Component, OnChanges, ChangeDetectionStrategy, NgZone, ApplicationRef} from '@angular/core';
 import {LetterAvatarDirective} from '../directives/letter-avatar.directive';

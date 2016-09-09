@@ -1,6 +1,6 @@
 {
   "name": "angular2-letter-avatar",
-  "version": "2.0.7",
+  "version": "2.0.8-rc-6",
   "description": "letter avatar is angular2 directive. It will generate avatar based on given text",
   "main": "index.js",
   "scripts": {
@@ -15,24 +15,28 @@
     "type": "git",
     "url": "git+https://github.com/rajan-g/angular2-letter-avatar.git"
   },
-  "dependencies": {
-    "@angular/common": "^2.0.0-rc.4",
-    "@angular/compiler": "^2.0.0-rc.4",
-    "@angular/core": "^2.0.0-rc.4",
-    "@angular/platform-browser": "^2.0.0-rc.4",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.4",
-    "@angular/upgrade": "^2.0.0-rc.4"
+   "dependencies": {   
   },
   "devDependencies": {
-    "systemjs": "0.19.27",
-    "core-js": "^2.4.0",
-    "reflect-metadata": "^0.1.3",
-    "rxjs": "5.0.0-beta.6",
-    "zone.js": "^0.6.12",
     "concurrently": "^2.0.0",
     "lite-server": "^2.2.0",
     "typescript": "^1.8.10",
-    "typings": "^1.0.4"
+    "typings":"^0.8.1",
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/compiler-cli": "0.6.0",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/forms": "2.0.0-rc.6",
+    "@angular/http": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
+    "@angular/router": "3.0.0-rc.2",
+    "@angular/upgrade": "2.0.0-rc.6",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.11",
+    "systemjs": "0.19.27",
+    "zone.js": "^0.6.17"
   },
   "keywords": [
     "angular2-avatar",

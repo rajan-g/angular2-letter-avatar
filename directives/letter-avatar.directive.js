@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/common', '@angular/platform-browser/src/browser/browser_adapter'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,23 +10,16 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, browser_adapter_1;
+    var core_1;
     var LetterAvatarDirective;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (common_1_1) {
-                common_1 = common_1_1;
-            },
-            function (browser_adapter_1_1) {
-                browser_adapter_1 = browser_adapter_1_1;
             }],
         execute: function() {
             LetterAvatarDirective = (function () {
-                function LetterAvatarDirective(el, dom) {
-                    this.dom = dom;
+                function LetterAvatarDirective(el) {
                     this.background = 'red';
                     this.fontSize = 49;
                     this.padding = 28;
@@ -114,11 +107,10 @@ System.register(['@angular/core', '@angular/common', '@angular/platform-browser/
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
-                        template: "      \n<!--<img style=\"background: {{background}}\" src=\"{{letterSrc}}\" /> -->\n<!--<canvas width=\"100\" height=\"100\" >\nYour browser does not support the HTML5 canvas tag.</canvas>-->\n<div *ngIf=\"props\" [style.background-color]=\"props.background\" [style.width] = \"props.size\" [style.line-height]='props.lineheight' [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] =\"props.textalign\"> \n<div [style.color]='fontColor'>{{props.letter}}</div>\n</div>\n", directives: [common_1.FORM_DIRECTIVES, common_1.NgIf],
-                        providers: [browser_adapter_1.BrowserDomAdapter],
+                        template: "\n            <div *ngIf=\"props\" [style.background-color]=\"props.background\" [style.width] = \"props.size\" [style.line-height]='props.lineheight' [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] =\"props.textalign\"> \n            <div [style.color]='fontColor'>{{props.letter}}</div>\n            </div>\n            ",
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
                     }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef, browser_adapter_1.BrowserDomAdapter])
+                    __metadata('design:paramtypes', [core_1.ElementRef])
                 ], LetterAvatarDirective);
                 return LetterAvatarDirective;
             }());

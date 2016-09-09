@@ -1,19 +1,13 @@
 import {Component, ElementRef, Input, OnInit, ChangeDetectionStrategy, OnChanges} from '@angular/core';
-import {FORM_DIRECTIVES, NgIf} from '@angular/common';
-import {BrowserDomAdapter} from '@angular/platform-browser/src/browser/browser_adapter';
 
 
 @Component({
   selector: 'avatar',
-  template: `      
-<!--<img style="background: {{background}}" src="{{letterSrc}}" /> -->
-<!--<canvas width="100" height="100" >
-Your browser does not support the HTML5 canvas tag.</canvas>-->
-<div *ngIf="props" [style.background-color]="props.background" [style.width] = "props.size" [style.line-height]='props.lineheight' [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] ="props.textalign"> 
-<div [style.color]='fontColor'>{{props.letter}}</div>
-</div>
-`, directives: [FORM_DIRECTIVES, NgIf],
-  providers: [BrowserDomAdapter],
+  template: `
+            <div *ngIf="props" [style.background-color]="props.background" [style.width] = "props.size" [style.line-height]='props.lineheight' [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] ="props.textalign"> 
+            <div [style.color]='fontColor'>{{props.letter}}</div>
+            </div>
+            `,
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
@@ -30,7 +24,7 @@ export class LetterAvatarDirective implements OnInit, OnChanges {
   props: Object = null;
   private _el: HTMLElement;
 
-  constructor(el: ElementRef, private dom: BrowserDomAdapter) {
+  constructor(el: ElementRef) {
     this._el = el.nativeElement;
   }
   test() {

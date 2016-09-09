@@ -1,6 +1,3 @@
-/*
- * @author RAJAN G
- */
 System.register(['@angular/core', '../directives/letter-avatar.directive'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
