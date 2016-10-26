@@ -4,7 +4,6 @@ import {LetterAvatarDirective} from '../directives/letter-avatar.directive';
 
 @Component({
     selector: 'my-app',
-    directives: [LetterAvatarDirective],
     template: `
         <avatar  [avatardata]="avatarDataSquare"></avatar>
         <avatar  [avatardata]="avatarDataCircle1"></avatar>

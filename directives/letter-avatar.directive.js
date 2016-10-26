@@ -57,7 +57,7 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                     this.props['size'] = size + 'px';
                     this.props['lineheight'] = this.size + 'px';
                     this.props['letter'] = letter;
-                    this.props['fontSize'] = this.fontSize;
+                    this.props['fontSize'] = this.fontSize + 'px';
                     if (isSquare) {
                         this.props['borderradius'] = '0%';
                     }
