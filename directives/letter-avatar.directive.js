@@ -1,6 +1,5 @@
-System.register(['@angular/core'], function(exports_1, context_1) {
+System.register(["@angular/core"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,15 +9,16 @@ System.register(['@angular/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var LetterAvatarDirective;
+    var core_1, LetterAvatarDirective;
+    var __moduleName = context_1 && context_1.id;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            }],
-        execute: function() {
-            LetterAvatarDirective = (function () {
+            }
+        ],
+        execute: function () {
+            LetterAvatarDirective = /** @class */ (function () {
                 function LetterAvatarDirective(el) {
                     this.background = 'red';
                     this.fontSize = 49;
@@ -96,26 +96,26 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 LetterAvatarDirective.prototype.ngOnChanges = function () {
                     var args = [];
                     for (var _i = 0; _i < arguments.length; _i++) {
-                        args[_i - 0] = arguments[_i];
+                        args[_i] = arguments[_i];
                     }
                     this.generateLetter();
                 };
                 __decorate([
-                    core_1.Input('avatardata'), 
-                    __metadata('design:type', Object)
+                    core_1.Input('avatardata'),
+                    __metadata("design:type", Object)
                 ], LetterAvatarDirective.prototype, "avatarData", void 0);
                 LetterAvatarDirective = __decorate([
                     core_1.Component({
                         selector: 'avatar',
                         template: "\n            <div *ngIf=\"props\" [style.background-color]=\"props.background\" [style.width] = \"props.size\" [style.line-height]='props.lineheight' [style.height] = 'props.size' [style.font-size] = 'props.fontSize' [style.border] = 'props.border' [style.border-radius] = 'props.borderradius' [style.text-align] =\"props.textalign\"> \n            <div [style.color]='fontColor'>{{props.letter}}</div>\n            </div>\n            ",
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
-                    }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef])
+                    }),
+                    __metadata("design:paramtypes", [core_1.ElementRef])
                 ], LetterAvatarDirective);
                 return LetterAvatarDirective;
             }());
             exports_1("LetterAvatarDirective", LetterAvatarDirective);
         }
-    }
+    };
 });
 //# sourceMappingURL=letter-avatar.directive.js.map

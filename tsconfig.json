@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
+    "noStrictGenericChecks": true,
     "types" : ["es6-shim", "jasmine"]  
   },
   "exclude": [

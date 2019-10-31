@@ -1,6 +1,5 @@
-System.register(['@angular/core'], function(exports_1, context_1) {
+System.register(["@angular/core"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,15 +9,16 @@ System.register(['@angular/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var AppComponent;
+    var core_1, AppComponent;
+    var __moduleName = context_1 && context_1.id;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            }],
-        execute: function() {
-            AppComponent = (function () {
+            }
+        ],
+        execute: function () {
+            AppComponent = /** @class */ (function () {
                 function AppComponent(ngZone, ref) {
                     this.ngZone = ngZone;
                     this.ref = ref;
@@ -72,13 +72,13 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                         selector: 'my-app',
                         template: "\n        <avatar  [avatardata]=\"avatarDataSquare\"></avatar>\n        <avatar  [avatardata]=\"avatarDataCircle1\"></avatar>\n        <avatar  [avatardata]=\"avatarDataCircle2\" ></avatar>\n        Enter Size <input type='text' placeholder='enter size' (change)='change()' [(ngModel)]='size' />\n        Enter Text <input type='text' placeholder='enter size' (change)='change()' [(ngModel)]='text' />",
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush
-                    }), 
-                    __metadata('design:paramtypes', [core_1.NgZone, core_1.ApplicationRef])
+                    }),
+                    __metadata("design:paramtypes", [core_1.NgZone, core_1.ApplicationRef])
                 ], AppComponent);
                 return AppComponent;
             }());
             exports_1("AppComponent", AppComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=app.component.js.map
