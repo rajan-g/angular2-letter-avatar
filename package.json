@@ -1,15 +1,13 @@
 {
   "name": "angular2-letter-avatar",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "letter avatar is angular2 directive. It will generate avatar based on given text",
   "main": "index.js",
   "scripts": {
     "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "lite": "lite-server",
-    "typings": "typings",
-    "postinstall": "typings install"
+    "lite": "lite-server"
   },
   "repository": {
     "type": "git",
@@ -20,8 +18,7 @@
   "devDependencies": {
     "concurrently": "^2.0.0",
     "lite-server": "^2.2.0",
-    "typescript": "^1.8.10",
-    "typings":"^0.8.1",    
+    "typescript": "^1.8.10",   
     "@angular/common": "~2.1.1",
     "@angular/compiler": "~2.1.1",
     "@angular/core": "~2.1.1",
@@ -37,6 +34,8 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.39",
+    "@types/jasmine" : "3.4.4",
+    "@types/es6-shim" : "0.31.39",
     "zone.js": "^0.6.25"
   },
   "keywords": [
